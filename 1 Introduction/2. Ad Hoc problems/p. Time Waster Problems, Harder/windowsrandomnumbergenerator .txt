@@ -1,0 +1,23 @@
+    std::random_device rd; // obtain a random number from hardware
+    std::mt19937 gen(rd()); // seed the generator
+    std::uniform_int_distribution<> distr(0, 10000000); // define the range
+    std::uniform_int_distribution<> distr2(0, 100000); // define the range
+    std::uniform_int_distribution<> distrcom(0, 50); // define the range
+    std::uniform_int_distribution<> distrcom256(3, 256); // define the range
+
+    string command0[4] = {"OPEN", "CLOSE", "RESIZE", "MOVE"};
+
+    for (int i = 0; i < 50; i++) {
+        cout << 1000000000 << ' ' << 1000000000 << endl;
+        int nocommands = distrcom256(gen);
+        for (int i = 0; i < nocommands; i++) {
+            int cmdno = distrcom(gen);
+            if (cmdno > 3) cmdno = 0; // open more windows
+            cout << command0[cmdno] << ' ';
+            if (cmdno != 1) {
+                cout << distr(gen) << ' ' << distr(gen) << ' ' << distr2(gen) << ' ' << distr2(gen) << endl;
+            } else {
+                cout << distr(gen) << ' ' << distr(gen) << endl;
+            }
+        }
+    }
